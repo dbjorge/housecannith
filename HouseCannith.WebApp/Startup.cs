@@ -57,6 +57,14 @@ namespace HouseCannith.WebApp
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseWhen(
+                context => !context.Request.IsHttps,
+                httpApp => httpApp.Use(async (context, next) =>
+                {
+                    var httpsUrl = "https://" + context.Request.Host + context.Request.Path;
+                    context.Response.Redirect(httpsUrl);
+                }));
+
             app.UseStaticFiles();
 
             app.UseCookieAuthentication();
