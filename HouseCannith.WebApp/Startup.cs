@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HouseCannith.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,6 +20,11 @@ namespace HouseCannith.WebApp
 
             if (env.IsDevelopment())
             {
+                // How to connect to the comprendium database for local testing:
+                //  1) Add your dev box's IP to the firewall rules at portal.azure.com
+                //  2) Right click on the HouseCannith.WebApp project, Manage User Secrets, and add an entry as follows (filling in the password):
+                //       "COMPRENDIUM_DATABASE_CONNECTION_STRING": "Server=tcp:comprendium.database.windows.net,1433;Initial Catalog=comprendium;Persist Security Info=False;User ID=ComprendiumDev;Password=PASSWORD_FROM_KEYPASS;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+                //
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
@@ -39,6 +42,10 @@ namespace HouseCannith.WebApp
 
             services.AddAuthentication(
                 SharedOptions => SharedOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var comprendiumDbConnectionString = Configuration["COMPRENDIUM_DATABASE_CONNECTION_STRING"];
+
+            services.AddDbContext<ComprendiumDbContext>(options => options.UseSqlServer(comprendiumDbConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
