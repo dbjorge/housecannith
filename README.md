@@ -15,7 +15,7 @@ The basic stack in use is:
 
 This page follows the guidance and conventions from the [*Using ASP.NET Core to Build Single-page Applications* Pluralsight course](https://pluralsight.com/courses/aspnet-core-build-single-page-applications) and Microsoft's [JavaScriptServices SpaTemplates](https://blogs.msdn.microsoft.com/webdev/2017/02/14/building-single-page-applications-on-asp-net-core-with-javascriptservices/). Those are excellent starting points if you're unfamiliar with parts of the stack.
 
-## Prerequisites
+## Getting Started
 
 * Install [Node.js LTS](https://nodejs.org) (at time of writing, 6.11.1)
 * Install the [.NET Core SDK](https://www.microsoft.com/net/download/core) (at time of writing, 1.0.4)
@@ -27,3 +27,6 @@ This page follows the guidance and conventions from the [*Using ASP.NET Core to 
   * In the [Azure portal](https://portal.azure.com), go to the *comprendium* SQL server's Firewall settings and add your dev box's IP
   * Execute the following from your prompt (fill in the password value!)
     * ```dotnet user-secrets set COMPRENDIUM_DATABASE_CONNECTION_STRING "Server=tcp:comprendium.database.windows.net,1433;Initial Catalog=comprendium;Persist Security Info=False;User ID=ComprendiumDev;Password=PASSWORD_FROM_KEYPASS;MultipleActiveResultSets=False;Encrypt=True"```
+* ```dotnet watch run```
+* Navigate to http://localhost:5000
+* Changes to both client and server code will take effect as you save files
