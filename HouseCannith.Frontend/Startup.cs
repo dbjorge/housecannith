@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using HouseCannith.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,8 +40,13 @@ namespace HouseCannith_Frontend
         // Stuff added here is generally consumed in Controllers via automatic constructor injection
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+            services.AddMvc(config => {
+                var requireAuthenticationByDefaultPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                config.Filters.Add(new AuthorizeFilter(requireAuthenticationByDefaultPolicy));
+            });
 
             services.AddAuthentication(
                 SharedOptions => SharedOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
@@ -65,9 +72,10 @@ namespace HouseCannith_Frontend
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHttpToHttpsRedirect();
+                app.UseExceptionHandler("/Home/Error");    
             }
+
+            app.UseHttpToHttpsRedirect();
 
             app.UseStaticFiles();
 

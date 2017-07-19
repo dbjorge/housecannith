@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace HouseCannith_Frontend
 {
@@ -12,7 +13,10 @@ namespace HouseCannith_Frontend
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel()
+                .UseUrls("https://localhost:5001")
+                .UseKestrel(options => {
+                    options.UseHttps("developmentHttpsCert.pfx", "insecure-development-cert-password");
+                })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

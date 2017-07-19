@@ -234,3 +234,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# This should never be checked in - each dev should generate their own
+developmentHttpsCert.pfx

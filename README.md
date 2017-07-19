@@ -20,6 +20,11 @@ This page follows the guidance and conventions from the [*Using ASP.NET Core to 
 * Install [Node.js LTS](https://nodejs.org) (at time of writing, 6.11.1)
 * Install the [.NET Core SDK](https://www.microsoft.com/net/download/core) (at time of writing, 1.0.4)
 * Clone the repo and cd to the ```HouseCannith.Frontend``` directory
+* Generate your own self-signed development https certificate (this doesn't get checked in):
+```
+$cert = New-SelfSignedCertificate $cert = New-SelfSignedCertificate -Subject localhost -DnsName localhost -FriendlyName "HouseCannith Development (self-signed)" -KeyUsage DigitalSignature -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.1") -CertStoreLocation 'cert:/CurrentUser/Root'
+Export-PfxCertificate -Cert $cert -FilePath 'developmentHttpsCert.pfx' -Password (ConvertTo-SecureString -String 'insecure-development-cert-password' -Force -AsPlainText)
+```
 * ```dotnet restore```
 * ```npm install```
 * Set up access to the content database from your local machine
@@ -28,5 +33,5 @@ This page follows the guidance and conventions from the [*Using ASP.NET Core to 
   * Execute the following from your prompt (fill in the password value!)
     * ```dotnet user-secrets set COMPRENDIUM_DATABASE_CONNECTION_STRING "Server=tcp:comprendium.database.windows.net,1433;Initial Catalog=comprendium;Persist Security Info=False;User ID=ComprendiumDev;Password=PASSWORD_FROM_KEYPASS;MultipleActiveResultSets=False;Encrypt=True"```
 * ```dotnet watch run```
-* Navigate to http://localhost:5000
+* Navigate to https://localhost:5001
 * Changes to both client and server code will take effect as you save files
