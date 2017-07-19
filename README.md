@@ -19,3 +19,11 @@ This page follows the guidance and conventions from the [*Using ASP.NET Core to 
 
 * Install [Node.js LTS](https://nodejs.org) (at time of writing, 6.11.1)
 * Install the [.NET Core SDK](https://www.microsoft.com/net/download/core) (at time of writing, 1.0.4)
+* Clone the repo and cd to the ```HouseCannith.Frontend``` directory
+* ```dotnet restore```
+* ```npm install```
+* Set up access to the content database from your local machine
+  * Get the necessary Azure access and secrets from @dbjorge
+  * In the [Azure portal](https://portal.azure.com), go to the *comprendium* SQL server's Firewall settings and add your dev box's IP
+  * Execute the following from your prompt (fill in the password value!)
+    * ```dotnet user-secrets set COMPRENDIUM_DATABASE_CONNECTION_STRING "Server=tcp:comprendium.database.windows.net,1433;Initial Catalog=comprendium;Persist Security Info=False;User ID=ComprendiumDev;Password=PASSWORD_FROM_KEYPASS;MultipleActiveResultSets=False;Encrypt=True"```

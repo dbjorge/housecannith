@@ -25,12 +25,6 @@ namespace HouseCannith_Frontend
 
             if (env.IsDevelopment())
             {
-                // How to connect to the comprendium database for local testing:
-                //  1) Add your dev box's IP to the firewall rules at portal.azure.com
-                //  2) Right click on the HouseCannith.WebApp project, Manage User Secrets, and add an entry as follows (filling in the password):
-                //       "COMPRENDIUM_DATABASE_CONNECTION_STRING": "Server=tcp:comprendium.database.windows.net,1433;Initial Catalog=comprendium;Persist Security Info=False;User ID=ComprendiumDev;Password=PASSWORD_FROM_KEYPASS;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-                //
-                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
 
@@ -72,9 +66,8 @@ namespace HouseCannith_Frontend
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHttpToHttpsRedirect();
             }
-
-            app.UseHttpToHttpsRedirect();
 
             app.UseStaticFiles();
 
