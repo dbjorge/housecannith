@@ -14,9 +14,7 @@ namespace HouseCannith_Frontend
         {
             var host = new WebHostBuilder()
                 .UseUrls("https://localhost:5001")
-                .UseKestrel(options => {
-                    options.UseHttps("developmentHttpsCert.pfx", "insecure-development-cert-password");
-                })
+                .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

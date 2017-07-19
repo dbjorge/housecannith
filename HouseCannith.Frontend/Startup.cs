@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -31,9 +32,12 @@ namespace HouseCannith_Frontend
             }
 
             builder.AddEnvironmentVariables();
+
             Configuration = builder.Build();
+            HostingEnvironment = env;
         }
 
+        public IHostingEnvironment HostingEnvironment { get; }
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -50,6 +54,14 @@ namespace HouseCannith_Frontend
 
             services.AddAuthentication(
                 SharedOptions => SharedOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // There may be a better way to do this in the future - see
+            // https://github.com/aspnet/KestrelHttpServer/issues/1334
+            if (HostingEnvironment.IsDevelopment()) {
+                services.Configure<KestrelServerOptions>(options => {
+                    options.UseHttps("developmentHttpsCert.pfx", "insecure-development-cert-password");
+                });
+            }
 
             var comprendiumDbConnectionString = Configuration["COMPRENDIUM_DATABASE_CONNECTION_STRING"];
 
