@@ -3,6 +3,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <IsPackable>false</IsPackable>
+    <UserSecretsId>fa4ac395-43c4-4699-91f7-26b10a83dcea</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.0" />
@@ -10,6 +11,12 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HouseCannith.Data\HouseCannith.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
