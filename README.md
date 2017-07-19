@@ -11,7 +11,7 @@ The basic stack in use is:
 * [Bootstrap](http://getbootstrap.com/) for layout and styling
 * [Azure SQL Server](https://azure.microsoft.com/en-us/services/sql-database/) for data storage
 * [Azure App Service](https://azure.microsoft.com/en-us/services/app-service/) for the hosting platform
-* [Visual Studio Team Services](https://www.visualstudio.com/team-services/) for CI builds and CD deployments
+* [Visual Studio Team Services](https://www.visualstudio.com/team-services/) for [CI builds](https://housecannith.visualstudio.com/HouseCannith/_build/index?definitionId=1) and [CD deployments](https://housecannith.visualstudio.com/HouseCannith/_release?definitionId=1&_a=releases)
 
 This page follows the guidance and conventions from the [*Using ASP.NET Core to Build Single-page Applications* Pluralsight course](https://pluralsight.com/courses/aspnet-core-build-single-page-applications) and Microsoft's [JavaScriptServices SpaTemplates](https://blogs.msdn.microsoft.com/webdev/2017/02/14/building-single-page-applications-on-asp-net-core-with-javascriptservices/). Those are excellent starting points if you're unfamiliar with parts of the stack.
 
